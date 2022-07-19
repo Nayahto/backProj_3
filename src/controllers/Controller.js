@@ -10,6 +10,9 @@ const index = (req, res) => {
 /*rota getAllControl */
 const projAll = async (req, res) => {
     const allId = await Serv.projAll();
+    if (allId.length == 0) {
+        res.status(201).send({ message: 'nenhum item cadastrado' });
+    }
     res.send(allId);
 };
 /*rota getByIdControl */

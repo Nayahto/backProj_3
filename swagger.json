@@ -1,0 +1,205 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "tittle": "morty rick Api",
+        "description": "api para junção com o front-end",
+        "termsaOfService": "",
+        "contact": {
+            "Email": "izau.sa.135@gmail.com"
+        },
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/",
+            "description": "link para teste"
+        },
+        { "url": "*link do deploy*", "description": "link para produção" }
+    ],
+    "paths": {
+        "/characters": {
+            "get": {
+                "summary": "rota geral dos indices",
+                "description": "rota responsavel por todos os indices ",
+                "tags": ["Tudo"],
+                "responses": {
+                    "404": {
+                        "description": "contêudo não encontrado"
+                    },
+                    "200": {
+                        "description": "contêudo encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$href": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/characters/find/{id}": {
+            "get": {
+                "summary": "rota encontrar os indices por identificadores",
+                "description": "rota responsavel por encontrar indices especificos ",
+                "tags": ["Encontrar"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do personagen para a busca",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Personagens"
+                            },
+                            "examples": {
+                                "Personagens": {
+                                    "value": {
+                                        "nome": "rick sanches",
+                                        "descricao": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
+                                        "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2Z2xdhMf_HVyvqiztXKkjwl-Jrr6SNdL8PA&usqp=CAU"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "contêudo não encontrado"
+                    },
+                    "200": {
+                        "description": "contêudo encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/characters/create": {
+            "post": {
+                "summary": "criacao dos indices",
+                "description": "rota responsavel pela cricao dos indices  ",
+                "tags": ["Create"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "examples": {
+                                "personagens": {
+                                    "value": {
+                                        "nome": "Morty Smith",
+                                        "descricao": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
+                                        "foto": "https://static.wikia.nocookie.net/rickandmorty/images/e/ee/Morty501.png/revision/latest?cb=20210827150137"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "nao foi possivel cadastrar o item, dados faltando!"
+                    },
+                    "200": {
+                        "description": "contêudo encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$href": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/characters/delete/{id}": {
+            "delete": {
+                "summary": "Apagar uma personagem pelo ID",
+                "description": "Rota responsável por apagar um personagem pelo ID",
+                "tags": ["Apagar"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do personagem para deleção",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/characters/update/{id}": {
+            "put": {
+                "summary": "Editar um usuario pelo ID",
+                "description": "Rota responsável por editar um usuario pelo ID",
+                "tags": ["Atualizar"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do personagem para a busca",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "examples": {
+                                "Personagens": {
+                                    "value": {
+                                        "nome": "Jerry Smith",
+                                        "descricao": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
+                                        "foto": "https://i.pinimg.com/originals/72/c3/3b/72c33b5df086100cfcd1c29aa02020b6.png"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

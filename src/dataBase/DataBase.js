@@ -1,7 +1,7 @@
 const mongo = require('mongoose');
 const PrjDb = () => {
     mongo
-        .connect('mongodb://localhost:27017/Project3Db', {
+        .connect(process.env.urlData, {
             useUnifiedTopology: true,
         })
         .then(() => {
